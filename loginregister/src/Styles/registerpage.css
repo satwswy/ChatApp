@@ -1,0 +1,11 @@
+.whatsappIcon:hover{
+    transform: scale(1.2);
+    transition: 0.5s;
+    color: black;
+}
+.whatsappIcon{
+    font-size:40px;
+    color:#128C7E
+}
+
+/*  sign up button */
