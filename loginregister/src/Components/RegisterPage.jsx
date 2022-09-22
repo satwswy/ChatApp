@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Form, Navbar, Row, Button } from "react-bootstrap/esm";
+import { Col, Container, Form, Navbar, Row, Button, Badge } from "react-bootstrap/esm";
 import { FaWhatsapp, FaGoogle } from "react-icons/fa";
 import "../Styles/registerpage.css";
 <link
@@ -9,11 +9,82 @@ import "../Styles/registerpage.css";
 />;
 
 const RegisterPage = () => {
+  // for changing between sign up and log in
   const [haveAccount, setHaveAccount] = useState(false);
 
+  // for badge
+  const [isFilled, setIsFilled] = useState(true)
+
+  // for posting
+  const [username , setusername] = useState('');
+  const [email , setemail] = useState('');
+  const [password , setpassword] = useState('');
+  const [token , setToken] = useState([])
+
+  const registerPost = async (e) => {
+    e.preventDefault();
+    const userInfos = {username , email , password}
+    console.log(userInfos);
+    try {
+      if(username !== '' && password !== '' && email !== ''){
+      let response = await fetch(`http://localhost:3009/users`, {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(userInfos)
+      })
+        if(response.ok){
+          setIsFilled(true)
+          let data = await response.json()
+          console.log(data , "voilaaa the data");
+          setHaveAccount(true)
+        } else {
+          console.log("error with response");
+        }
+      } else{
+        setIsFilled(false)
+      }
+    } catch (error) {
+      console.log(error , "eerrrror bro");
+      setHaveAccount(false)
+    }
+  }
+
+  const loginUser = async (e) =>{
+    
+    e.preventDefault();
+    const userInfos = {email , password};
+    console.log(userInfos);
+    try {
+      if(password !== '' && email !== ''){
+      let response = await fetch(`http://localhost:3009/users/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(userInfos)
+      })
+      if(response.ok){
+        let data = await response.json()
+        setToken(data)
+      }else{
+        console.log("response error");
+      }
+    }else{
+      alert("please fill all the requirments")
+    }
+    } catch (error) {
+      console.log(error,"error buddy");
+      
+    }
+  }
+
   useEffect(() => {
-    setHaveAccount(false);
-  }, []);
+    console.log(token.acessToken, "Thats the token");
+    window.localStorage.setItem("SetToken",JSON.stringify(token.acessToken))
+    console.log(window.localStorage.getItem("SetToken"),"token stored!");
+  }, [token]);
   return (
     <Container fluid style={{ backgroundColor: "#204E4A" }} className="pb-5">
       {haveAccount === false ? (
@@ -56,6 +127,8 @@ const RegisterPage = () => {
                       <Form.Control
                         type="email"
                         placeholder="Example : jack@gmail.com"
+                        value={email}
+                        onChange={(e)=> setemail(e.target.value)}
                       />
                       <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -67,7 +140,11 @@ const RegisterPage = () => {
                       <Form.Label>
                         <b>User Name</b>
                       </Form.Label>
-                      <Form.Control type="email" placeholder="Example : jack" />
+                      <Form.Control 
+                      type="email"
+                       placeholder="Example : jack" 
+                       value={username}
+                       onChange={(e)=> setusername(e.target.value)}/>
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12} className="m-auto">
@@ -75,7 +152,11 @@ const RegisterPage = () => {
                       <Form.Label>
                         <b>Password</b>
                       </Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
+                      <Form.Control 
+                      type="password"
+                       placeholder="Password" 
+                       value={password}
+                       onChange={(e)=> setpassword(e.target.value)}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Check
@@ -84,9 +165,13 @@ const RegisterPage = () => {
                       />
                     </Form.Group>
 
-                    <Button variant="success" type="submit">
+                    <Button variant="primary" type="submit" onClick={registerPost} >
                       Sign up
                     </Button>
+                    {isFilled === false ?                     <div>
+                    <Badge className="p-3 mt-4" variant="danger">Please fill all the requirements!</Badge>{' '}
+                    </div> : <></> }
+
                     <p
                       onClick={() => setHaveAccount(true)}
                       style={{ cursor: "pointer" }}
@@ -176,6 +261,8 @@ const RegisterPage = () => {
                     <Form.Control
                       type="email"
                       placeholder="Example : jack@gmail.com"
+                      value={email}
+                      onChange={(e)=> setemail(e.target.value)}
                     />
                     <Form.Text className="text-muted">
                       We'll never share your email with anyone else.
@@ -187,7 +274,11 @@ const RegisterPage = () => {
                     <Form.Label>
                       <b>Password</b>
                     </Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    value={password}
+                    onChange={(e)=> setpassword(e.target.value)}/>
                   </Form.Group>
                   <Form.Group controlId="formBasicCheckbox">
                     <Form.Check
@@ -196,7 +287,7 @@ const RegisterPage = () => {
                     />
                   </Form.Group>
 
-                  <Button variant="success" type="submit">
+                  <Button variant="success" type="submit" onClick={loginUser}>
                     Log in
                   </Button>
                   <p
