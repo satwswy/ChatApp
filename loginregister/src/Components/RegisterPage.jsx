@@ -15,6 +15,9 @@ const RegisterPage = () => {
   // for badge
   const [isFilled, setIsFilled] = useState(true)
 
+  // for wrong Username or password
+  const [isCorrect , setIsCorrect] = useState(true)
+
   // for posting
   const [username , setusername] = useState('');
   const [email , setemail] = useState('');
@@ -50,7 +53,16 @@ const RegisterPage = () => {
       setHaveAccount(false)
     }
   }
-
+  useEffect(()=>{
+    setTimeout(()=>{
+      setIsFilled(true)
+    },3200)
+  },[isFilled])
+  useEffect(()=>{
+    setTimeout(()=>{
+      setIsCorrect(true)
+    },3200)
+  },[isCorrect])
   const loginUser = async (e) =>{
     
     e.preventDefault();
@@ -70,9 +82,10 @@ const RegisterPage = () => {
         setToken(data)
       }else{
         console.log("response error");
+        setIsCorrect(false)
       }
     }else{
-      alert("please fill all the requirments")
+      setIsFilled(false)
     }
     } catch (error) {
       console.log(error,"error buddy");
@@ -93,6 +106,7 @@ const RegisterPage = () => {
             <Navbar
               className="pb-3 pt-3"
               style={{ backgroundColor: "whiteSmoke" }}
+             
             >
               <Col xs={2} className="text-left">
                 <FaWhatsapp className="whatsappIcon" />
@@ -290,6 +304,13 @@ const RegisterPage = () => {
                   <Button variant="success" type="submit" onClick={loginUser}>
                     Log in
                   </Button>
+                  {isFilled === false ?                     <div>
+                    <Badge className="p-3 mt-4" variant="danger">Please fill all the requirements!</Badge>{' '}
+                    </div> : <></> }
+                    {isCorrect === false ?
+                            <div>
+                            <Badge className="p-3 mt-4" variant="danger">Wrong email or password</Badge>{' '}
+                            </div> : <></>}
                   <p
                     onClick={() => setHaveAccount(false)}
                     style={{ cursor: "pointer" }}
