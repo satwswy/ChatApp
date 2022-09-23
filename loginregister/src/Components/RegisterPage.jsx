@@ -99,7 +99,7 @@ const RegisterPage = () => {
     console.log(window.localStorage.getItem("SetToken"),"token stored!");
   }, [token]);
   return (
-    <Container fluid style={{ backgroundColor: "#204E4A" }} className="pb-5">
+    <Container fluid style={{ backgroundColor: "#204E4A",minHeight:"100vh" }} className="pb-5">
       {haveAccount === false ? (
         <Row>
           <Col xs={12} className="pr-0 pl-0">
@@ -124,12 +124,7 @@ const RegisterPage = () => {
           </Col>
           <Col className="offset-1" style={{ marginTop: "10rem" }} xs={10}>
             <div
-              style={{
-                backgroundColor: "white",
-                borderRadius: "15px",
-                width: "100%",
-              }}
-              className=" pl-2 pr-2 pt-4 p-md-5 shadow-lg"
+              className=" pl-2 pr-2 pt-4 p-md-5 shadow-lg mx-auto signupContainer"
             >
               <Form>
                 <Row>
@@ -143,6 +138,8 @@ const RegisterPage = () => {
                         placeholder="Example : jack@gmail.com"
                         value={email}
                         onChange={(e)=> setemail(e.target.value)}
+                        style={{width:"70%"}}
+                        className="ml-auto mr-auto"
                       />
                       <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -158,7 +155,10 @@ const RegisterPage = () => {
                       type="email"
                        placeholder="Example : jack" 
                        value={username}
-                       onChange={(e)=> setusername(e.target.value)}/>
+                       onChange={(e)=> setusername(e.target.value)}
+                       style={{width:"70%"}}
+                       className="ml-auto mr-auto"/>
+                       
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12} className="m-auto">
@@ -170,7 +170,9 @@ const RegisterPage = () => {
                       type="password"
                        placeholder="Password" 
                        value={password}
-                       onChange={(e)=> setpassword(e.target.value)}/>
+                       onChange={(e)=> setpassword(e.target.value)}
+                       style={{width:"70%"}}
+                       className="ml-auto mr-auto"/>
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Check
@@ -258,12 +260,7 @@ const RegisterPage = () => {
         </Col>
         <Col className="offset-1" style={{ marginTop: "10rem" }} xs={10}>
           <div
-            style={{
-              backgroundColor: "white",
-              borderRadius: "15px",
-              width: "100%",
-            }}
-            className=" pl-2 pr-2 pt-4 p-md-5 shadow-lg"
+            className=" pl-2 pr-2 pt-4 p-md-5 shadow-lg signupContainer mx-auto"
           >
             <Form>
               <Row>
@@ -277,6 +274,8 @@ const RegisterPage = () => {
                       placeholder="Example : jack@gmail.com"
                       value={email}
                       onChange={(e)=> setemail(e.target.value)}
+                      style={{width:"60%"}}
+                      className="ml-auto mr-auto"
                     />
                     <Form.Text className="text-muted">
                       We'll never share your email with anyone else.
@@ -292,7 +291,9 @@ const RegisterPage = () => {
                     type="password" 
                     placeholder="Password" 
                     value={password}
-                    onChange={(e)=> setpassword(e.target.value)}/>
+                    onChange={(e)=> setpassword(e.target.value)}
+                    style={{width:"60%"}}
+                    className="ml-auto mr-auto"/>
                   </Form.Group>
                   <Form.Group controlId="formBasicCheckbox">
                     <Form.Check
