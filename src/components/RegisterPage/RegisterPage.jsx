@@ -103,7 +103,7 @@ const RegisterPage = () => {
     <Container fluid style={{ backgroundColor: "#204E4A",minHeight:"100vh" }} className="pb-5">
       {haveAccount === false ? (
         <Row>
-          <Col xs={12} className="pr-0 pl-0">
+          <Col xs={12} className="pr-0 pl-0 px-0">
             <Navbar
               className="pb-3 pt-3"
               style={{ backgroundColor: "whiteSmoke" }}
