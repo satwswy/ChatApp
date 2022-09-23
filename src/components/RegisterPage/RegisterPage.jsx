@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Navbar, Row, Button, Badge } from "react-bootstrap/esm";
 import { FaWhatsapp, FaGoogle } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "./Registerpage.css";
 <link
@@ -30,6 +31,7 @@ const RegisterPage = () => {
     const userInfos = {username , email , password}
     console.log(userInfos);
     try {
+      setIsFilled(true)
       if(username !== '' && password !== '' && email !== ''){
       let response = await fetch('http://localhost:3009/users', {
         method: "POST",
@@ -39,7 +41,6 @@ const RegisterPage = () => {
         body : JSON.stringify(userInfos)
       })
         if(response.ok){
-          setIsFilled(true)
           let data = await response.json()
           console.log(data , "voilaaa the data");
           setHaveAccount(true)
@@ -54,23 +55,24 @@ const RegisterPage = () => {
       setHaveAccount(false)
     }
   }
-  useEffect(()=>{
-    setTimeout(()=>{
-      setIsFilled(true)
-    },3200)
-  },[isFilled])
+
   useEffect(()=>{
     setTimeout(()=>{
       setIsCorrect(true)
     },3200)
   },[isCorrect])
+
+
+  const navigate = useNavigate()
+
+
   const loginUser = async (e) =>{
-    
     e.preventDefault();
     const userInfos = {email , password};
     console.log(userInfos);
     try {
       if(password !== '' && email !== ''){
+        setIsFilled(true)
       let response = await fetch(`http://localhost:3009/users/login`, {
         method: "POST",
         headers: {
@@ -80,6 +82,7 @@ const RegisterPage = () => {
       })
       if(response.ok){
         let data = await response.json()
+        navigate('/homepage')
         setToken(data)
       }else{
         console.log("response error");
@@ -95,15 +98,15 @@ const RegisterPage = () => {
   }
 
   useEffect(() => {
-    console.log(token.acessToken, "Thats the token");
-    window.localStorage.setItem("SetToken",JSON.stringify(token.acessToken))
-    console.log(window.localStorage.getItem("SetToken"),"token stored!");
+      console.log(token.acessToken, "Thats the token");
+      window.localStorage.setItem("SetToken",JSON.stringify(token.acessToken))
+      console.log(window.localStorage.getItem("SetToken"),"token stored!");
   }, [token]);
   return (
     <Container fluid style={{ backgroundColor: "#204E4A",minHeight:"100vh" }} className="pb-5">
       {haveAccount === false ? (
         <Row>
-          <Col xs={12} className="pr-0 pl-0 px-0">
+          <Col xs={12} className="pr-0 pl-0">
             <Navbar
               className="pb-3 pt-3"
               style={{ backgroundColor: "whiteSmoke" }}
@@ -302,11 +305,9 @@ const RegisterPage = () => {
                       label="Save email & password"
                     />
                   </Form.Group>
-
-                  <Link to='/homepage'><Button variant="success" type="submit" onClick={loginUser}>
+                    <Button variant="success" type="submit" onClick={loginUser}>
                   Log In
                   </Button>
-                  </Link>
                   {isFilled === false ?                     <div>
                     <Badge className="p-3 mt-4" variant="danger">Please fill all the requirements!</Badge>{' '}
                     </div> : <></> }

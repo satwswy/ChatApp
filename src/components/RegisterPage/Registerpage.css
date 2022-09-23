@@ -13,7 +13,7 @@
     border-radius: 15px;
     width: 70%;
 }
-@media only screen and (max-width:475px) {
+@media only screen and (max-width:530px) {
     .signupContainer{  
           width: 100%;
     }

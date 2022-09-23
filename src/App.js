@@ -11,7 +11,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<RegisterPage/>}/>
+        
+        <Route path="/" element={<div className="App"><RegisterPage/> </div>}/>
+       
         <Route path="/homepage" element={<div className="Container">
           <ContactListComponent setChat={setSelectedChat} />
           {selectedChat ? (
