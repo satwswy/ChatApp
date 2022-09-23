@@ -8,4 +8,15 @@
     color:#128C7E
 }
 
+.signupContainer{
+    background-color: white;
+    border-radius: 15px;
+    width: 70%;
+}
+@media only screen and (max-width:475px) {
+    .signupContainer{  
+          width: 100%;
+    }
+}
+
 /*  sign up button */
