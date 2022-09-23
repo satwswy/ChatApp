@@ -1,0 +1,89 @@
+.Container3{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 3;
+    background: #f6f7f8;
+}
+
+.ProfileHeader{
+    display: flex;
+    flex-direction: row;
+    background: #ededed;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+}
+.ProfileImage2{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.ChatBox{
+    display: flex;
+    background: #f0f0f0;
+    padding: 10px;
+    align-items: center;
+    bottom: 0;
+}
+.SearchContainer2{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    padding: 5px 10px;
+}
+.SearchInput2{
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.EmojiImage{
+    width: 28px;
+    height: 28px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.MessageContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #e5ddd6;
+    overflow-y: auto;
+}
+
+.MessageDiv{
+    
+    display: flex;
+    margin: 5px 15px;
+    justify-content: flex-end;
+}
+
+.Message{
+    max-width: 50%;
+    padding: 8px 10px;
+    font-size: 14px;
+    background: #daf8cb;
+    border-radius: 4px;
+}
+
+.MessageDiv2{
+    
+    display: flex;
+    margin: 5px 15px;
+    justify-content: flex-start;
+}
+
+.Message2{
+    max-width: 50%;
+    padding: 8px 10px;
+    font-size: 14px;
+    background: white;
+    border-radius: 4px;
+}
