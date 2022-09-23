@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Navbar, Row, Button, Badge } from "react-bootstrap/esm";
 import { FaWhatsapp, FaGoogle } from "react-icons/fa";
-import "../Styles/registerpage.css";
+import "./Registerpage.css";
 <link
   rel="stylesheet"
   type="text/css"
