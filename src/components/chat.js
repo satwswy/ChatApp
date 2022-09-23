@@ -91,3 +91,5 @@ function handleKeyPress(e){
         </Container>
     )
 }
+
+export default Chat

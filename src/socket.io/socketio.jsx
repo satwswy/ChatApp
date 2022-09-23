@@ -132,3 +132,5 @@ body = (
 
     )
 }
+
+export default TalkChat
