@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Navbar, Row, Button, Badge } from "react-bootstrap/esm";
 import { FaWhatsapp, FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./Registerpage.css";
 <link
   rel="stylesheet"
@@ -30,7 +31,7 @@ const RegisterPage = () => {
     console.log(userInfos);
     try {
       if(username !== '' && password !== '' && email !== ''){
-      let response = await fetch(`http://localhost:3009/users`, {
+      let response = await fetch('http://localhost:3009/users', {
         method: "POST",
         headers: {
             "Content-Type" : "application/json",
@@ -301,9 +302,10 @@ const RegisterPage = () => {
                     />
                   </Form.Group>
 
-                  <Button variant="success" type="submit" onClick={loginUser}>
-                    Log in
+                  <Link to='/homepage'><Button variant="success" type="submit" onClick={loginUser}>
+                  Log In
                   </Button>
+                  </Link>
                   {isFilled === false ?                     <div>
                     <Badge className="p-3 mt-4" variant="danger">Please fill all the requirements!</Badge>{' '}
                     </div> : <></> }

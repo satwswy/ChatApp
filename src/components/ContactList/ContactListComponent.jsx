@@ -22,7 +22,7 @@ const ContactComponent = (props) => {
 
 
 const ContactListComponent = (props) => {
-
+  const token =  window.localStorage.getItem("SetToken")
     const [users, setUsers] = useState([])
     useEffect(() => {
 
@@ -36,7 +36,7 @@ const ContactListComponent = (props) => {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzJhZWQ5YjE4MWZmNjRlZjhmM2QwMWUiLCJpYXQiOjE2NjM3NTc3NDcsImV4cCI6MTY2Mzc3MjE0N30.CuO9D0Oq_t1DGtk9NRkVhioXhGLwPURVE5RREDBqcbo'
+                        Authorization: token
                     }
                 })
             if (response.ok) {
